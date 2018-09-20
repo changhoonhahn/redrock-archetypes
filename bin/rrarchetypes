@@ -154,7 +154,10 @@ def get_galaxies(nb,wave,seed):
     for k in list(data.keys()):
         for j in range(data[k]['NB']):
             subtype[i] = k
-            flux[i] = resample_flux(wave, data[k]['WAVE'], data[k]['FLUX'][j])
+            if k != 'feasiBGS': 
+                flux[i] = resample_flux(wave, data[k]['WAVE'], data[k]['FLUX'][j])
+            else: 
+                flux[i] = resample_flux(wave, data[k]['WAVE'][j], data[k]['FLUX'][j])
             i += 1
     flux /= np.median(flux,axis=1)[:,None]
 
